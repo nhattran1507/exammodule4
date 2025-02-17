@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Quản lý sản phẩm</title>
-    <!-- Sử dụng Bootstrap 5 từ CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .pagination { justify-content: center; }
@@ -14,11 +13,9 @@
 <div class="container my-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="mb-0">Quản lý sản phẩm</h1>
-        <!-- Nút Thêm sản phẩm đặt bên phải -->
         <a th:href="@{/products/create}" class="btn btn-success">Thêm sản phẩm</a>
     </div>
 
-    <!-- Form Tìm Kiếm -->
     <form class="mb-4" th:action="@{/products}" method="get">
         <div class="row g-3 align-items-end">
             <div class="col-md-3">
@@ -47,8 +44,6 @@
             </div>
         </div>
     </form>
-
-    <!-- Form chứa danh sách sản phẩm để batch delete -->
     <form id="deleteForm" method="post" th:action="@{/products/batch-delete}">
         <div class="table-responsive">
             <table class="table table-bordered table-striped align-middle">
@@ -63,7 +58,6 @@
                 </tr>
                 </thead>
                 <tbody>
-                <!-- Giả sử products là đối tượng Page<Product> -->
                 <tr th:each="product, iterStat : ${products.content}">
                     <td th:text="${iterStat.index + 1 + (products.number * products.size)}"></td>
                     <td>
@@ -78,7 +72,7 @@
             </table>
         </div>
 
-        <!-- Nút gọi Modal xóa (giữ lại vị trí dưới bảng nếu cần) -->
+
         <div class="d-flex justify-content-start align-items-center mt-3">
             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
                 Xóa các sản phẩm đã chọn
@@ -86,7 +80,6 @@
         </div>
     </form>
 
-    <!-- Modal xác nhận xóa -->
     <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -98,16 +91,13 @@
                     Bạn có muốn xóa tất cả sản phẩm đã chọn không?
                 </div>
                 <div class="modal-footer">
-                    <!-- Nút NO: đóng modal -->
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                    <!-- Nút YES: submit form -->
                     <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Yes</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Thanh phân trang -->
     <nav class="mt-4">
         <ul class="pagination">
             <li class="page-item" th:classappend="${!products.hasPrevious()} ? 'disabled'">
@@ -124,10 +114,8 @@
     </nav>
 </div>
 
-<!-- Bootstrap JS Bundle (bao gồm Popper) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    // Khi nhấn nút Yes trong modal, submit form xóa
     document.getElementById("confirmDeleteBtn").addEventListener("click", function() {
         document.getElementById("deleteForm").submit();
     });
