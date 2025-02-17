@@ -44,14 +44,11 @@ public class ProductController {
     }
 
 
-    // Hiển thị form tạo mới sản phẩm
     @GetMapping("/create")
     public String showCreateForm(Model model) {
         Product product = new Product();
-        // Nếu cần, có thể set giá trị mặc định cho status (ví dụ: "Available")
         product.setStatus("Available");
         model.addAttribute("product", product);
-        // Lấy danh sách các loại sản phẩm để hiển thị ở form (select box)
         model.addAttribute("productTypes", productTypeService.findAll());
         return "product/create";
     }
@@ -70,8 +67,6 @@ public class ProductController {
         return "redirect:/products";
     }
 
-
-    // Hiển thị form chỉnh sửa sản phẩm
     @GetMapping("/{id}/edit")
     public String showEditForm(@PathVariable("id") Integer id, Model model, RedirectAttributes redirectAttributes) {
         Optional<Product> productOptional = productService.findById(id);
@@ -87,7 +82,7 @@ public class ProductController {
     public String batchDelete(@RequestParam(name = "selectedIds", required = false) List<Integer> selectedIds,
                               RedirectAttributes redirectAttributes) {
         if (selectedIds != null && !selectedIds.isEmpty()) {
-            // Xóa từng sản phẩm theo ID (hoặc bạn có thể tối ưu lại để xóa tất cả cùng lúc)
+
             for (Integer id : selectedIds) {
                 productService.deleteById(id);
             }
