@@ -12,7 +12,11 @@
 </head>
 <body>
 <div class="container my-4">
-    <h1 class="mb-4">Quản lý sản phẩm</h1>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="mb-0">Quản lý sản phẩm</h1>
+        <!-- Nút Thêm sản phẩm đặt bên phải -->
+        <a th:href="@{/products/create}" class="btn btn-success">Thêm sản phẩm</a>
+    </div>
 
     <!-- Form Tìm Kiếm -->
     <form class="mb-4" th:action="@{/products}" method="get">
@@ -44,7 +48,6 @@
         </div>
     </form>
 
-
     <!-- Form chứa danh sách sản phẩm để batch delete -->
     <form id="deleteForm" method="post" th:action="@{/products/batch-delete}">
         <div class="table-responsive">
@@ -68,7 +71,6 @@
                     </td>
                     <td th:text="${product.name}"></td>
                     <td th:text="${T(java.lang.String).format('%,.0f VND', product.price).replaceAll(',', '.')}"></td>
-
                     <td th:text="${product.productType != null ? product.productType.name : 'N/A'}"></td>
                     <td th:text="${product.status}"></td>
                 </tr>
@@ -76,13 +78,11 @@
             </table>
         </div>
 
-        <!-- Các nút thao tác: Xóa và Thêm sản phẩm -->
-        <div class="d-flex justify-content-between align-items-center mt-3">
-            <!-- Nút gọi Modal -->
+        <!-- Nút gọi Modal xóa (giữ lại vị trí dưới bảng nếu cần) -->
+        <div class="d-flex justify-content-start align-items-center mt-3">
             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
                 Xóa các sản phẩm đã chọn
             </button>
-            <a th:href="@{/products/create}" class="btn btn-success">Thêm sản phẩm</a>
         </div>
     </form>
 

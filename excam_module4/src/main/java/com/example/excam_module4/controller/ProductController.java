@@ -47,7 +47,7 @@ public class ProductController {
     @GetMapping("/create")
     public String showCreateForm(Model model) {
         Product product = new Product();
-        product.setStatus("Available");
+        product.setStatus("Chờ duyêt");
         model.addAttribute("product", product);
         model.addAttribute("productTypes", productTypeService.findAll());
         return "product/create";
